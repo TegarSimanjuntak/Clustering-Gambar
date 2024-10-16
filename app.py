@@ -102,7 +102,7 @@ def cluster_image(img, n_clusters):
     return labeled_img, kmeans.labels_
 
 # Streamlit app
-st.title("Segment Level Clustering Using Manual K-Means")
+st.title("Segment Level Clustering Using Manual K-Means.")
 
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png"])
 
