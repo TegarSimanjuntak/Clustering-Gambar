@@ -1,7 +1,6 @@
 import streamlit as st
 import numpy as np
-import cv2
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 import matplotlib.pyplot as plt
 import random
 
@@ -84,7 +83,8 @@ def cluster_image(img, n_clusters):
     labeled_img = Image.fromarray(clustered_img)
     draw = ImageDraw.Draw(labeled_img)
 
-     try:
+    # Mengatur font dan ukuran
+    try:
         font = ImageFont.truetype("arial.ttf", 30)  # Ukuran font 30px
     except IOError:
         font = ImageFont.load_default()  # Jika font tidak tersedia, gunakan default
@@ -96,7 +96,7 @@ def cluster_image(img, n_clusters):
         cluster_points = np.argwhere(labels == label)
         if len(cluster_points) > 0:
             y, x = cluster_points[len(cluster_points) // 2]
-            draw.text((x, y), str(label + 1), fill=(255, 0, 0), font=font,stroke_width=2, stroke_fill="white")
+            draw.text((x, y), str(label + 1), fill=(255, 0, 0), font=font, stroke_width=2, stroke_fill="white")
     
     return labeled_img, kmeans.labels_
 
