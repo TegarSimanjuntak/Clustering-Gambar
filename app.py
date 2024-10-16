@@ -85,7 +85,7 @@ def cluster_image(img, n_clusters):
 
     # Mengatur font dengan ukuran yang lebih besar
     try:
-        font = ImageFont.truetype("arial.ttf", 30)  # Meningkatkan ukuran font ke 50px
+        font = ImageFont.truetype("Wreaths.otf", 30)  # Meningkatkan ukuran font ke 50px
     except IOError:
         font = ImageFont.load_default()  # Jika font tidak tersedia, gunakan default (lebih kecil)
 
