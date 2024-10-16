@@ -15,7 +15,7 @@ def euclidean_distance(point1, point2):
     return np.sqrt(np.sum((point1 - point2) ** 2))
 
 class ManualKMeans:
-    def __init__(self, n_clusters, max_iters=100, tolerance=1e-4):  # Perbaiki nama metode
+    def __init__(self, n_clusters, max_iters=100, tolerance=1e-4):
         self.n_clusters = n_clusters
         self.max_iters = max_iters
         self.tolerance = tolerance
@@ -83,11 +83,11 @@ def cluster_image(img, n_clusters):
     labeled_img = Image.fromarray(clustered_img)
     draw = ImageDraw.Draw(labeled_img)
 
-    # Mengatur font dan ukuran
+    # Mengatur font dengan ukuran yang lebih besar
     try:
-        font = ImageFont.truetype("arial.ttf", 30)  # Ukuran font 30px
+        font = ImageFont.truetype("arial.ttf", 30)  # Meningkatkan ukuran font ke 50px
     except IOError:
-        font = ImageFont.load_default()  # Jika font tidak tersedia, gunakan default
+        font = ImageFont.load_default()  # Jika font tidak tersedia, gunakan default (lebih kecil)
 
     labels = kmeans.labels_.reshape(img.size[1], img.size[0])
     
@@ -96,6 +96,7 @@ def cluster_image(img, n_clusters):
         cluster_points = np.argwhere(labels == label)
         if len(cluster_points) > 0:
             y, x = cluster_points[len(cluster_points) // 2]
+            # Tambahkan label ke gambar dengan font yang lebih besar
             draw.text((x, y), str(label + 1), fill=(255, 0, 0), font=font, stroke_width=2, stroke_fill="white")
     
     return labeled_img, kmeans.labels_
