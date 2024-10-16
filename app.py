@@ -83,7 +83,12 @@ def cluster_image(img, n_clusters):
     # Add labels to clusters
     labeled_img = Image.fromarray(clustered_img)
     draw = ImageDraw.Draw(labeled_img)
-    
+
+     try:
+        font = ImageFont.truetype("arial.ttf", 30)  # Ukuran font 30px
+    except IOError:
+        font = ImageFont.load_default()  # Jika font tidak tersedia, gunakan default
+
     labels = kmeans.labels_.reshape(img.size[1], img.size[0])
     
     unique_labels = np.unique(labels)
@@ -91,7 +96,7 @@ def cluster_image(img, n_clusters):
         cluster_points = np.argwhere(labels == label)
         if len(cluster_points) > 0:
             y, x = cluster_points[len(cluster_points) // 2]
-            draw.text((x, y), str(label + 1), fill=(255, 0, 0), stroke_width=2, stroke_fill="white")
+            draw.text((x, y), str(label + 1), fill=(255, 0, 0), font=font,stroke_width=2, stroke_fill="white")
     
     return labeled_img, kmeans.labels_
 
